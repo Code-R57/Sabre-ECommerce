@@ -37,6 +37,40 @@ def loginUser(request):
 
     return render(request, "error.html")
 
+def register(request):
+    return render(request, 'register.html')
+
+
+
+def registerUser(request):
+    global username
+    name=""
+    password=""
+    locality=""
+    street=""
+    pin=""
+    if request.method=="POST":
+        data=request.POST
+        for key,value in data.items():
+            if key=="username":
+                username=value
+            if key=="name":
+                name=value
+            if key=="password":
+                password=value
+            if key=="locality":
+                locality=value
+            if key=="street":
+                street=value
+            if key=="pin":
+                pin=value
+        
+        c="insert into user Values('{}','{}','{}','{}','{}','{}')".format(username,name,password,locality,street,pin)
+        cursor.execute(c)
+        connection.commit()
+
+    return render(request,'main.html')
+
 def logoutUser(request):
     logout(request)
     return redirect("/login")
