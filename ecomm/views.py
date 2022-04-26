@@ -40,8 +40,6 @@ def loginUser(request):
 def register(request):
     return render(request, 'register.html')
 
-
-
 def registerUser(request):
     global username
     name=""
@@ -65,11 +63,26 @@ def registerUser(request):
             if key=="pin":
                 pin=value
         
-        c="insert into user Values('{}','{}','{}','{}','{}','{}')".format(username,name,password,locality,street,pin)
-        cursor.execute(c)
+        query = "insert into user Values('{}','{}','{}','{}','{}','{}')".format(username,name,password,locality,street,pin)
+        cursor.execute(query)
         connection.commit()
 
     return render(request,'main.html')
+
+def home(request):
+    return render(request, 'main.html')
+
+def cart(request):
+    return render(request, 'cart.html')
+
+def confirmation(request):
+    return render(request, 'confirmation.html')
+
+def productdescription(request):
+    return render(request, 'productdescription.html')
+
+def checkout(request):
+    return render(request, 'checkout.html')
 
 def logoutUser(request):
     logout(request)
