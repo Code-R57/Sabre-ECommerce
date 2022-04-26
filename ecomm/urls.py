@@ -9,4 +9,9 @@ urlpatterns = [
     path('logout', views.logoutUser, name="logout"),
     path('register', views.register, name="register"),
     path('registerUser', views.registerUser, name="registerUser"),
+    path('home',views.home, name="home"),
+    path('cart',views.cart, name="cart"),
+    path('confirmation',views.confirmation, name="confirmation"),
+    path('checkout',views.checkout, name="checkout"),
+    path('productdescription',views.productdescription, name="productdescription")
 ]
