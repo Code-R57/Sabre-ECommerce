@@ -2,13 +2,13 @@
 .divider:before {
 content: "";
 flex: 1;
-height: 1px;
+height: 0.0625rem;
 background: #eee;
 }
 .h-custom {
-height: calc(100% - 73px);
+height: calc(100% - 4.5625rem);
 }
-@media (max-width: 450px) {
+@media (max-width: 28.125rem) {
 .h-custom {
 height: 100%;
 }

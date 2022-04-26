@@ -11,7 +11,7 @@ username = ""
 
 # Create your views here.
 def index(request):
-    return render(request, 'login.html')
+    return render(request, 'login.html', {'error': ""})
 
 def loginUser(request):
     if request.method=="POST":
@@ -31,22 +31,23 @@ def loginUser(request):
         value = tuple(cursor.fetchall())
 
         if value == ():
-            return render(request, "login.html")
+            return render(request, "login.html", {'error': "Username or password is invalid"})
         else:
-            return render(request, "main.html")
-
-    return render(request, "error.html")
+            if request.session['cart_items_num'] == None:
+                request.session['cart_items_num'] = 0
+            return render(request, "main.html", {'cart_items_num': request.session['cart_items_num']})
 
 def register(request):
-    return render(request, 'register.html')
+    return render(request, 'register.html', {'error': ""})
 
 def registerUser(request):
     global username
-    name=""
-    password=""
-    locality=""
-    street=""
-    pin=""
+    name = ""
+    password = ""
+    locality = ""
+    street = ""
+    pin = ""
+
     if request.method=="POST":
         data=request.POST
         for key,value in data.items():
@@ -63,26 +64,38 @@ def registerUser(request):
             if key=="pin":
                 pin=value
         
-        query = "insert into user Values('{}','{}','{}','{}','{}','{}')".format(username,name,password,locality,street,pin)
+        query = "SELECT * FROM USER WHERE UserID = '{}'".format(username)
         cursor.execute(query)
-        connection.commit()
+        value = tuple(cursor.fetchall())
 
-    return render(request,'main.html')
+        if value == ():
+            query = "insert into user Values('{}','{}','{}','{}','{}','{}')".format(username,name,password,locality,street,pin)
+            cursor.execute(query)
+            connection.commit()
+            if request.session['cart_items_num'] == None:
+                request.session['cart_items_num'] = 0
+            return render(request,'main.html', {'cart_items_num': request.session['cart_items_num']})
+        else:
+            return render(request, 'register.html', {'error': 'Username taken'})
+
+def addToCart(request):
+    request.session['cart_items_num'] += 1
+    return render(request, 'productdescription.html', {'cart_items_num': request.session['cart_items_num']})
 
 def home(request):
-    return render(request, 'main.html')
+    return render(request, 'main.html', {'cart_items_num': request.session['cart_items_num']})
 
 def cart(request):
-    return render(request, 'cart.html')
+    return render(request, 'cart.html', {'cart_items_num': request.session['cart_items_num']})
 
 def confirmation(request):
-    return render(request, 'confirmation.html')
+    return render(request, 'confirmation.html', {'cart_items_num': request.session['cart_items_num']})
 
 def productdescription(request):
-    return render(request, 'productdescription.html')
+    return render(request, 'productdescription.html', {'cart_items_num': request.session['cart_items_num']})
 
 def checkout(request):
-    return render(request, 'checkout.html')
+    return render(request, 'checkout.html', {'cart_items_num': request.session['cart_items_num']})
 
 def logoutUser(request):
     logout(request)
