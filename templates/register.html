@@ -8,7 +8,8 @@ Register
 https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp{% endblock image %}
 
 {% block form %}
-<form method="post" action="/registerUser">
+<div>
+<form method="post" action="{% url 'registerUser' %}">
   {% csrf_token %}
 
   <div class="form-outline mb-3">
@@ -64,8 +65,9 @@ https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.web
 
   <div class="text-center text-lg-start mt-4 pt-2">
     <button type="submit" class="btn btn-primary btn-lg"
-      style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+      style="padding-left: 2.5rem; padding-right: 2.5rem;">Register</button>
     <p class="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a href="./" class="link-danger">Sign In</a></p>
   </div>
 </form>
+</div>
 {% endblock form %}

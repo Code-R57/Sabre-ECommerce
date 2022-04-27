@@ -4828,3 +4828,103 @@ a {
         padding-bottom: 115px !important
     }
 }
+
+.a{
+    overflow: hidden;
+    /* max-width: 1.2rem; */
+     word-wrap: break-word;
+    margin-top:4rem;
+} 
+.a td{
+    padding-right: 2rem;
+    padding-bottom: 1.2rem;
+    text-align: left;
+    word-wrap: break-word;
+    max-width: 4rem;
+    padding:1.2rem;
+    font-size: 1.1rem;
+    border-bottom: 0.02rem solid black ;
+    
+    
+}
+.a table{
+    
+    padding:4rem;
+    margin: 0 auto;
+    width:1100px;
+}
+.a td .bold{
+    font-weight: bold;
+    
+    color: black;
+    font-size: 1.4rem;
+    margin-left: 4rem;
+    margin-right: 1rem;
+    text-decoration: underline;
+    text-decoration-thickness: .16rem;
+    text-decoration-color:black ;
+    font-family: "Oswald", sans-serif;
+}
+.a .order_details_table{
+    margin:0 auto;
+}
+.a p{
+    text-align: justify;
+    margin-left: 4rem;
+}
+.b {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+.a .sp{
+    border-bottom: 0px;
+}
+
+.b h2{
+    font-size: 1.6rem;
+}
+
+.b .order_details_table .table tr th {
+    border-bottom: 1px solid rgb(0, 0, 0);
+    font-size: 1.4rem;
+    font-family: "Oswald", sans-serif;
+    font-weight: normal;
+    color: #222
+}
+
+.a .tab{
+    margin-left: 12rem;
+}
+.containerc {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 4rem;
+}
+
+.button1{
+ 
+    color: #000000; /* Text color */
+     
+    background-color: #ffffff; /* Remove background color */
+     
+    border: 2px solid #000000; /* Border thickness, line style, and color */
+     
+    border-radius: 30%; /* Adds curve to border corners */
+     
+    text-transform: uppercase; /* Make letters uppercase */
+
+    font-size: 1.2rem;
+    
+}
+
+
+input:hover{
+    background-color: #d2d2d2;
+}
+
+.upper{
+    text-align: center;
+}
