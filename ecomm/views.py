@@ -95,9 +95,19 @@ class Cart:
         prod = tuple(cursor.fetchall())
         self.quant_price = prod[0][3] * product[0][4]
     
-def addToCart(request, pid, sid, quant):
+def addToCart(request):
         global cart_quantity
         global username
+        if request.method=='POST':
+            data=request.POST
+        for key,value in data.items():
+            if key=="pid":
+                pid=value
+            if key=="sid":
+                sid=value
+            if key=="qty":
+                quant=value
+
         query_check = "SELECT * FROM CART WHERE ProductID = '{}'".format(pid)
         cursor.execute(query_check)
         check = tuple(cursor.fetchall())
@@ -111,7 +121,6 @@ def addToCart(request, pid, sid, quant):
             cursor.execute(query)
             connection.commit()
 
-        #add sellerID options in productdescription.html
         query_quant = "select sum(quantity) from cart where UserID = '{}'".format(username)
         cursor.execute(query_quant)
         cart_quantity = int(cursor.fetchall())
@@ -142,15 +151,29 @@ def confirmation(request):
 def productdescription(request, pid):
     global cart_quantity
     global username
+
     query = "SELECT * FROM PRODUCT WHERE ProductID = '{}'".format(pid)
     cursor.execute(query)
     product = tuple(cursor.fetchall())
     name = product[0][1]
     price = product[0][4]
+    descrp = product[0][3]
+
     query_cat = "SELECT CategoryName FROM CATEGORY WHERE CategoryID = '{}'".format(product[0][5])
     cursor.execute(query_cat)
     category = str(cursor.fetchall())
-    return render(request, 'productdescription.html', {'cart_items_num': cart_quantity, 'name': name, 'price': price, 'category': category})
+
+    query_sid = "SELECT SellerID FROM SELLER_PRODUCT WHERE ProdutID = '{}'".format(pid)
+    cursor.execute(query_sid)
+    seller_id = list(cursor.fetchall())
+    sellers = []
+    for id in seller_id:
+        query = "SELECT SellerName FROM SELLER WHERE SellerID = '{}'".format(int(id))
+        cursor.execute(query)
+        sname = str(cursor.fetchall())
+        sellers.append(sname)
+    
+    return render(request, 'productdescription.html', {'cart_items_num': cart_quantity, 'name': name, 'price': price, 'category': category, 'descrp': descrp, 'sellers': sellers, 'pid': pid})
 
 def checkout(request):
     global cart_quantity
