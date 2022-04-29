@@ -130,7 +130,6 @@ def addToCart(request, pid):
     cart_quantity = (tuple(cursor.fetchall()))[0][0]
     return redirect("/productdescription/"+str(pid))
 
-
 def home(request):
     global cart_quantity
 
@@ -194,6 +193,7 @@ def confirmation(request):
 def productdescription(request, pid):
     global cart_quantity
     global username
+
     query = "SELECT * FROM PRODUCT WHERE ProductID = '{}'".format(pid)
     cursor.execute(query)
     product = tuple(cursor.fetchall())
