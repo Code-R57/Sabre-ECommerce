@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head_title %}Confirmation{% endblock head_title %}
-
+{% block uid %}{{ uid }}{% endblock uid %}
 {% block body %}
 <section class="order_details section-margin--small">
     <div class="container">
@@ -13,19 +13,19 @@
             <table class="order-rable">
               <tr>
                 <td>Order number</td>
-                <td>: 60235</td>
+                <td>: {{order_id}}</td>
               </tr>
               <tr>
                 <td>Date</td>
-                <td>: Oct 03, 2017</td>
+                <td>: {{order_items.0.7}}</td>
               </tr>
               <tr>
                 <td>Total</td>
-                <td>: USD 2210</td>
+                <td>: ₹ {{total}}</td>
               </tr>
               <tr>
-                <td>Payment method</td>
-                <td>: Check payments</td>
+                <td> </td>
+                <td> </td>
               </tr>
             </table>
           </div>
@@ -35,20 +35,20 @@
             <h3 class="billing-title">Billing Address</h3>
             <table class="order-rable">
               <tr>
-                <td>Street</td>
-                <td>: 56/8 panthapath</td>
+                <td>Locality</td>
+                <td>: {{user_detail.4}}, {{user_detail.5}}</td>
               </tr>
               <tr>
                 <td>City</td>
-                <td>: Dhaka</td>
+                <td>: {{user_detail.6}}</td>
               </tr>
               <tr>
-                <td>Country</td>
-                <td>: Bangladesh</td>
+                <td>State</td>
+                <td>: {{user_detail.7}}</td>
               </tr>
               <tr>
-                <td>Postcode</td>
-                <td>: 1205</td>
+                <td>PIN code</td>
+                <td>: {{user_detail.0}}</td>
               </tr>
             </table>
           </div>
@@ -58,20 +58,20 @@
             <h3 class="billing-title">Shipping Address</h3>
             <table class="order-rable">
               <tr>
-                <td>Street</td>
-                <td>: 56/8 panthapath</td>
+                <td>Locality</td>
+                <td>: {{user_detail.4}}, {{user_detail.5}}</td>
               </tr>
               <tr>
                 <td>City</td>
-                <td>: Dhaka</td>
+                <td>: {{user_detail.6}}</td>
               </tr>
               <tr>
-                <td>Country</td>
-                <td>: Bangladesh</td>
+                <td>State</td>
+                <td>: {{user_detail.7}}</td>
               </tr>
               <tr>
-                <td>Postcode</td>
-                <td>: 1205</td>
+                <td>PIN code</td>
+                <td>: {{user_detail.0}}</td>
               </tr>
             </table>
           </div>
@@ -89,61 +89,19 @@
               </tr>
             </thead>
             <tbody>
+              {% for item in order_items %}
               <tr>
                 <td>
-                  <p>Pixelstore fresh Blackberry</p>
+                  <p> {{item.2}} </p>
                 </td>
                 <td>
-                  <h5>x 02</h5>
+                  <h5>x {{item.3}}</h5>
                 </td>
                 <td>
-                  <p>$720.00</p>
+                  <p>₹{{item.5}}</p>
                 </td>
               </tr>
-              <tr>
-                <td>
-                  <p>Pixelstore fresh Blackberry</p>
-                </td>
-                <td>
-                  <h5>x 02</h5>
-                </td>
-                <td>
-                  <p>$720.00</p>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <p>Pixelstore fresh Blackberry</p>
-                </td>
-                <td>
-                  <h5>x 02</h5>
-                </td>
-                <td>
-                  <p>$720.00</p>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h4>Subtotal</h4>
-                </td>
-                <td>
-                  <h5></h5>
-                </td>
-                <td>
-                  <p>$2160.00</p>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h4>Shipping</h4>
-                </td>
-                <td>
-                  <h5></h5>
-                </td>
-                <td>
-                  <p>Flat rate: $50.00</p>
-                </td>
-              </tr>
+              {% endfor %}
               <tr>
                 <td>
                   <h4>Total</h4>
@@ -152,7 +110,7 @@
                   <h5></h5>
                 </td>
                 <td>
-                  <h4>$2210.00</h4>
+                  <h4>₹{{total}}</h4>
                 </td>
               </tr>
             </tbody>

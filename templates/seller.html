@@ -13,13 +13,14 @@
   <link rel="stylesheet" href="{% static 'styles/bootstrap.min.css'%}">
   <link rel="stylesheet" href="{% static 'styles/styles.css'%}">
 
-    <title>Sabre | {% block head_title %}{% endblock %}</title>
+    <title>Sabre | Seller Account</title>
 </head>
+<body>
 <header class="header_area">
     <div class="main_menu">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
-                <a class="navbar-brand logo_h" href="{% url 'home' %}"><img src="{% static 'img/Logo.png' %}" alt="logo" width="65%"></a>
+                <a class="navbar-brand logo_h" href="#"><img src="{% static 'img/Logo.png' %}" alt="logo" width="65%"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -29,15 +30,13 @@
                 </button>
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/search">Shop</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/user/{% block uid %}{% endblock %}">Account</a></li>
+                        <li class="nav-item"></li>
+                        <li class="nav-item"></li>
+                        <li class="nav-item"></li>
                         </li>
                     </ul>
 
                     <ul class="nav-shop">
-                        <li class="nav-item"><a href="{% url 'cart' %}"><button><i class="ti-shopping-cart"></i><span
-                            class="nav-shop__circle">{{cart_items_num}}</span></button></a> </li>
                         <li class="nav-item"><a class="button button-header" href="{% url 'logout' %}">Logout</a></li>
                     </ul>
                 </div>
@@ -45,7 +44,147 @@
         </nav>
     </div>
 </header>
-{% block body %}{% endblock body %}
+<div class="containerc">
+    <div class="a">
+        <div class="row my-5">
+            <div class="order_details_table">
+                <table>
+                    <tr>
+                        <td colspan="3"> <span class="bold">Seller ID:</span><span
+                                class="righta">{{ seller.0 }}</span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"> <span class="bold">Name:</span> {{ seller.2 }} </td>
+                        <td> <span class="bold">GSTIN:</span> {{ seller.8 }} <span class="tab"></span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><span class="bold">Email:</span> {{ seller.9 }} </td>
+                        <td><span class="bold">Phone no.:</span> {{ seller.10 }} </td>
+                    </tr>
+
+                    <tr>
+                        <td class="sp"><span class="bold">Address:</span>
+                            <p>{{ seller.4 }}, {{ seller.5 }}<br />{{ seller.6 }}, {{ seller.7 }}<br />{{ seller.1 }}</p>
+                        </td>
+                        <td class="sp">
+                        </td>
+                        <td class="sp">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="b">
+        <div class="order_details_table">
+            <h2>Product Sales</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in order_delivered %}
+                        <tr>
+                            <td>
+                                <p>{{ order.0 }}</p>
+                            </td>
+                            <td>
+                                <h5>x {{ order.1 }}</h5>
+                            </td>
+                            <td>
+                                <p>₹{{ order.2 }}</p>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td>
+                                <h4>Total</h4>
+                            </td>
+                            <td>
+                                <h5></h5>
+                            </td>
+                            <td>
+                                <h4>₹{{total}}</h4>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="b">
+        <div class="order_details_table">
+            <h2>Add Products</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <form action="/addProduct/{{sid}}" method="POST">
+                        {% csrf_token %}
+                        <tr>
+                            <th><label for="products">Product</label></th>
+                            <th><select id="products" name="products">
+                                {% for product in product_list %}
+                                <option value="{{ product.0 }}">{{ product.1 }}</option>
+                                {% endfor %}
+                              </select></th>
+                        
+                        </tr>
+                        <tr>
+                            <th><label for="quantity">Quantity</label></th>
+                            <th><input type="number" placeholder="Enter quantity" id="quantity" name="quantity"> </th>
+                        </tr>
+                        <tr>
+                            <th><label for="price">Price</label></th>
+                            <th><input type="number" placeholder="Enter price" id="price" name="price"> </th>
+                        </tr>
+                        <tr>
+                     
+                            <td colspan="4" class="upper"><button type="submit" class="button1"> Submit </button></td>
+                        </tr>
+
+                    
+                </form>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="b">
+        <div class="order_details_table">
+            <h2>Update Quantity</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <form action="/updateQuantity/{{sid}}" method="POST">
+                        {% csrf_token %}
+                        <tr>
+                            <th><label for="products">Product</label></th>
+                            <th><select id="products" name="products">
+                                {% for product in existing_product %}
+                                <option value="{{ product.0 }}">{{ product.1 }}</option>
+                                {% endfor %}
+                              </select></th>
+                        
+                        </tr>
+                        <tr>
+                            <th><label for="quantity">Quantity</label></th>
+                            <th><input type="number" placeholder="Enter quantity" id="quantity" name="quantity"> </th>
+                        </tr>
+                        <tr>
+                     
+                            <td colspan="4" class="upper"><button type="submit" class="button1"> Submit </button></td>
+                        </tr>
+
+                    
+                </form>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 <footer>
     <div class="footer-area footer-only">
         <div class="container">
