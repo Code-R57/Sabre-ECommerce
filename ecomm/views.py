@@ -130,6 +130,18 @@ def addToCart(request, pid):
     cart_quantity = (tuple(cursor.fetchall()))[0][0]
     return redirect("/productdescription/"+str(pid))
 
+def deleteFromCart(request, pid, sid):
+    global cart_quantity
+
+    delete_query = "DELETE FROM CART WHERE UserID = '{}' and SellerID = '{}' and ProductID = '{}';".format(username, sid, pid)
+    cursor.execute(delete_query)
+    connection.commit()
+
+    query_quantity = "select count(*) from cart where UserID = '{}';".format(username)
+    cursor.execute(query_quantity)
+    cart_quantity = (tuple(cursor.fetchall()))[0][0]
+
+    return redirect("/cart")
 
 def home(request):
     global cart_quantity
@@ -138,7 +150,7 @@ def home(request):
     cursor.execute(query_quantity)
     cart_quantity = (tuple(cursor.fetchall()))[0][0]
 
-    query = "SELECT * FROM PRODUCT NATURAL JOIN CATEGORY ORDER BY PRODUCTID DESC LIMIT 4;"
+    query = "SELECT * FROM PRODUCT natural join url_table NATURAL JOIN CATEGORY ORDER BY PRODUCTID DESC LIMIT 4;"
     cursor.execute(query)
     products = tuple(cursor.fetchall())
 
@@ -168,7 +180,6 @@ def cart(request):
     total = (tuple(cursor.fetchall()))[0][0]
 
     return render(request, 'cart.html', {'cart_items_num': cart_quantity, 'cart_items': cart_items, 'total': total, 'uid': username})
-
 
 def confirmation(request):
     global cart_quantity
@@ -212,7 +223,36 @@ def productdescription(request, pid):
     return render(request, 'productdescription.html', {'cart_items_num': cart_quantity, 'name': name, 'price': price, 'category': category, 'description': description, 'sellers': sellers, 'rating': rating, 'uid': username, 'pid': pid})
 
 def search(request):
-    return render(request, 'search.html', {'cart_items_num': cart_quantity, 'uid': username})
+
+    query = "SELECT * FROM PRODUCT NATURAL JOIN CATEGORY ORDER BY PRODUCTID;"
+    cursor.execute(query)
+    products = tuple(cursor.fetchall())
+
+    return render(request, 'search.html', {'products': products, 'cart_items_num': cart_quantity, 'uid': username})
+
+def search_result(request):
+
+    productName = ""
+    criteria = "Price"
+
+    if request.method=="POST":
+        data=request.POST
+        for key,value in data.items():
+            if key == "productName":
+                productName = value
+            if key == "criteria":
+                criteria = value
+
+        if criteria=="Price":
+            criteria="MRP"
+        else:
+            criteria="Rating"
+
+        query = "SELECT * FROM PRODUCT NATURAL JOIN CATEGORY WHERE PRODUCTNAME LIKE '%{}%' or CATEGORYNAME LIKE '%{}%' ORDER BY {} ASC;".format(productName, productName, criteria)
+        cursor.execute(query)
+        products = tuple(cursor.fetchall())
+
+    return render(request, 'search.html', {'products': products, 'cart_items_num': cart_quantity, 'uid': username})
 
 def user(request, uid):
     global cart_quantity

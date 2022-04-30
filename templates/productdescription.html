@@ -24,25 +24,31 @@
                     <h3>{{name}}</h3>
                     <h2>₹{{price}}</h2>
                     <ul class="list">
-                        <li><a class="active" href="#"><span>Category</span> : {{category}}</a></li>
+                        <li><span>Category</span> : {{category}}</li>
                     </ul>
                     <p>{{description}}</p>
-                    
+
                     <form action="/addToCart/{{pid}}" method="POST">
                         {% csrf_token %}
-                    <div class="product_count">
-                        <label for="qty">Quantity:</label>
-                        <input type="text" name="qty" id="qty" size="2" maxlength="3" value="1" title="Quantity:" class="input-text qty">
-                        <button type="submit"> Add to Cart </button>       
-                    </div>
-                    <div class="card_area d-flex align-items-center">
-                        <strong>Sold By:</strong><br />
-                        <select id="sellers" name="sellers">
-                            {% for seller in sellers %}
-                            <option value="{{ seller.0 }}">{{ seller.1 }} - ₹{{ seller.3 }} (Quantity: {{ seller.2 }})</option>
-                            {% endfor %}
-                        </select>
-                    </div>
+                        <div class="product_count">
+                            <label style="float:left" for="qty">Quantity:</label>
+                            <input style="float:left;" type="text" name="qty" id="qty" size="2" maxlength="3" value="1"
+                                title="Quantity:" class="input-text qty">
+                        </div>
+
+                        <div class="card_area d-flex align-items-center">
+                            <strong style="margin-right:1rem">Sold By:</strong><br />
+                            <select id="sellers" name="sellers">
+                                {% for seller in sellers %}
+                                <option value="{{ seller.0 }}">{{ seller.1 }} - ₹{{ seller.3 }} (Stock : {{seller.2}})</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div>
+                            <button
+                                style="display: inline; float:right;border-radius:40%; position:relative;right:12rem; top:1.5rem; background-color:#384aeb; border:3px solid #000099; color:white"
+                                type="submit"> Add to Cart </button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -56,16 +62,16 @@
     <div class="container">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review"
-                 aria-selected="false">Reviews</a>
+                <a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab"
+                    aria-controls="review" aria-selected="false">Reviews</a>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6" style="margin: 0 auto">
                         <div class="row total_rate">
-                            <div class="col-6">
+                            <div class="col-6" style="margin: 0 auto">
                                 <div class="box_total">
                                     <h5>Overall</h5>
                                     <h4>{{rating}}</h4>
@@ -73,10 +79,10 @@
                             </div>
                         </div>
                     </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
 </section>{% endblock body %}

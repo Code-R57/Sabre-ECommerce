@@ -22,7 +22,7 @@
                             <td>
                                 <div class="media">
                                     <div class="d-flex">
-                                        <img src="D:\MyFolder\Ritvik\BITS Pilani\BPHC\Semester 4\DBMS\Project\Sabre-ECommerce\static\img\Logo.png" alt="">
+                                        <img src="" alt="">
                                     </div>
                                     <div class="media-body">
                                         <p>{{item.1}}</p>
@@ -36,7 +36,9 @@
                                 <h5>x {{item.2}}</h5>
                             </td>
                             <td>
-                                <h5>₹{{item.4}}</h5>
+                                <h5>₹{{item.4}} <button title="delete item" style="margin-left:-4rem; float:right; background-color:  #ffe6e6
+                                    ; border:2px solid red; color:red; font-weight:bold; border-radius:30%"><a href="/deleteFromCart/{{item.0}}+{{item.5}}" style="color: red">X</a></button></h5>
+                                
                             </td>
                         </tr>
                         {% endfor %}
@@ -67,7 +69,7 @@
                             </td>
                             <td>
                                 <div class="checkout_btn_inner d-flex align-items-center">
-                                    <a class="gray_btn" href="/home">Continue Shopping</a>
+                                    <a class="gray_btn" href="{% url 'search' %}">Continue Shopping</a>
                                     {% if cart_items_num != 0 %}
                                     <a class="primary-btn ml-2" href="/placeOrder">Place Order</a>
                                     {% endif %}

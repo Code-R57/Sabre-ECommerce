@@ -12,8 +12,14 @@
   <link rel="stylesheet" href="{% static 'styles/vendors/owl-carousel/owl.carousel.min.css'%}">
   <link rel="stylesheet" href="{% static 'styles/bootstrap.min.css'%}">
   <link rel="stylesheet" href="{% static 'styles/styles.css'%}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>Sabre | {% block head_title %}{% endblock %}</title>
+
+    <style>
+       
+    </style>
 </head>
 <header class="header_area">
     <div class="main_menu">
@@ -30,7 +36,7 @@
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
                         <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/search">Shop</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'search' %}">Shop</a></li>
                         <li class="nav-item"><a class="nav-link" href="/user/{% block uid %}{% endblock %}">Account</a></li>
                         </li>
                     </ul>
@@ -54,12 +60,10 @@
                     <div class="single-footer-widget tp_widgets ">
                         <h4 class="footer_title large_title">Our Mission</h4>
                         <p>
-                            So seed seed green that winged cattle in. Gathering thing made fly you're no
-                            divided deep moved us lan Gathering thing us land years living.
+                            We at Sabre aim to provide a user-friendly experience to our customers with an effort to deliver the best service at the cheapest prices.
                         </p>
                         <p>
-                            So seed seed green that winged cattle in. Gathering thing made fly you're no divided deep
-                            moved
+                            With our huge network of delivery men, we promise to deliver the products as earliest as possible.
                         </p>
                     </div>
                 </div>
@@ -67,16 +71,16 @@
                     <div class="single-footer-widget tp_widgets">
                         <h4 class="footer_title">Quick Links</h4>
                         <ul class="list">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Shop</a></li>
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Product</a></li>
-                            <li><a href="#">Brand</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="{% url 'home' %}">Home</a></li>
+                            <li><a href="{% url 'search' %}">Shop</a></li>
+                            {% comment %} <li><a href="#">Blog</a></li> {% endcomment %}
+                            {% comment %} <li><a href="/user/{% block uid %}{% endblock %}">Account</a></li> {% endcomment %}
+                            <li><a href="{% url 'cart' %}">Cart</a></li>
+                            {% comment %} <li><a href="#">Contact</a></li> {% endcomment %}
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6 col-sm-6">
+                {% comment %} <div class="col-lg-2 col-md-6 col-sm-6">
                     <div class="single-footer-widget instafeed">
                         <h4 class="footer_title">Gallery</h4>
                         <ul class="list instafeed d-flex flex-wrap">
@@ -88,33 +92,33 @@
                             <li><img src="img/gallery/r8.jpg" alt=""></li>
                         </ul>
                     </div>
-                </div>
+                </div> {% endcomment %}
                 <div class="offset-lg-1 col-lg-3 col-md-6 col-sm-6">
                     <div class="single-footer-widget tp_widgets">
                         <h4 class="footer_title">Contact Us</h4>
                         <div class="ml-40">
                             <p class="sm-head">
-                                <span class="fa fa-location-arrow"></span>
+                                
                                 Head Office
                             </p>
-                            <p>123, Main Street, Your City</p>
+                            <p><a href="https://www.google.com/maps/place/Birla+Institute+of+Technology+%26+Science+Pilani,+Hyderabad+Campus/@17.5448939,78.5696493,17z/data=!3m1!4b1!4m5!3m4!1s0x3bcb83594a86132d:0xc3e06e9e76cebf3d!8m2!3d17.5448888!4d78.571838">123, BITS Hyderabad, 500078</a></p>
 
                             <p class="sm-head">
-                                <span class="fa fa-phone"></span>
+                                
                                 Phone Number
                             </p>
                             <p>
-                                +123 456 7890 <br>
-                                +123 456 7890
+                                <a href="tel:123-456-7890">+91 9900727217</a> <br>
+                                <a href="tel:123-456-7890">+91 9133445561</a> <br>
                             </p>
 
                             <p class="sm-head">
-                                <span class="fa fa-envelope"></span>
+                                
                                 Email
                             </p>
                             <p>
-                                free@infoexample.com <br>
-                                www.infoexample.com
+                               <a href="mailto: dhruvvmerchant07@gmail.com"> dhruvvmerchant07@gmail.com</a> <br>
+                               <a href="mailto: dhruvvmerchant07@gmail.com"> Sabre.123@gmail.com</a> 
                             </p>
                         </div>
                     </div>
@@ -131,6 +135,12 @@
 <script src="../static/styles/vendors/jquery.ajaxchimp.min.js"></script>
 <script src="../static/styles/vendors/mail-script.js"></script>
 <script src="../static/styles/js/main.js"></script>
+<script src="../static/styles/js/temp.js"></script>
+
+
+
+<script src="js/jquery-1.7.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
 <body>
 
 </body>

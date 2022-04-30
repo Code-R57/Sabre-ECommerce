@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 {% block head_title %}User Account{% endblock head_title %}
+{% block uid %}{{ uid }}{% endblock uid %}
 {% block body %}
 <div class="containerc">
     <div class="a">
+        <h2 style="margin-left:2rem;">User details: </h2>
+
         <div class="row my-5">
             <div class="order_details_table">
+                
             <table>
                 <tr>
                     <td colspan="3"> <span class="bold" >Username:</span><span class="righta"> {{user.1}} </span></td>
@@ -28,7 +32,7 @@
         </div>
         </div>
     </div>
-    <h2>Present Orders: </h2>
+    <h2 style="margin-left:2rem;">Present Orders: </h2>
     <div class="b">
         {% for order in present_order %}
         <div class="order_details_table">
@@ -61,8 +65,9 @@
     </div>
 
 
-    <h2>Past Orders: </h2>
-    {% for order in past_order %}
+    <h2 style="margin-top:2rem; margin-left:2rem">Past Orders: </h2>
+    <div class="b">
+        {% for order in past_order %}
         <div class="order_details_table">
             <h3>Order ID: {{order.0}}</h3>
             <div class="table-responsive">
@@ -90,5 +95,6 @@
             </div>
         </div>
         {% endfor %}
+    </div>
 </div>
 {% endblock body %}
