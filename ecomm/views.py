@@ -205,6 +205,7 @@ def confirmation(request):
 def productdescription(request, pid):
     global cart_quantity
     global username
+
     query = "SELECT * FROM PRODUCT WHERE ProductID = '{}'".format(pid)
     cursor.execute(query)
     product = tuple(cursor.fetchall())
