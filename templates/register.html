@@ -9,65 +9,55 @@ https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.web
 
 {% block form %}
 <div>
-<form method="post" action="{% url 'registerUser' %}">
-  {% csrf_token %}
+  <form method="post" action="{% url 'registerUser' %}">
+    {% csrf_token %}
 
-  <div class="form-outline mb-3">
-    <input type="text" class="form-control form-control-lg" placeholder="Username"
-      name="username" />
-    <p style="color: red; font-size: 1rem;">{{error}}</p>
-  </div>
+    <div class="form-outline mb-3">
+      <input type="text" class="form-control form-control-lg" placeholder="Username" name="username" />
+      <p style="color: red; font-size: 1rem;">{{error}}</p>
+    </div>
 
-  <div class="form-outline mb-3">
-    <input type="text" class="form-control form-control-lg" placeholder="Name"
-      name="name" />
-  </div>
+    <div class="form-outline mb-3">
+      <input type="text" class="form-control form-control-lg" placeholder="Name" name="name"
+        style="display: inline-block; margin-bottom: 8px;" />
+      <input type="password" class="form-control form-control-lg" placeholder="Password" name="password"
+        style="display: inline-block;" />
+    </div>
 
-  <div class="form-outline mb-3">
-    <input type="password" class="form-control form-control-lg" placeholder="Password"
-      name="password" />
-  </div>
+    {% comment %} <div class="form-outline mb-3">
+      <input type="password" class="form-control form-control-lg" placeholder="Confirm Password"
+        name="confirm-password" />
+    </div> {% endcomment %}
 
-  {% comment %} <div class="form-outline mb-3">
-    <input type="password" class="form-control form-control-lg" placeholder="Confirm Password"
-      name="confirm-password" />
-  </div> {% endcomment %}
+    <div class="form-outline mb-3">
+      <input type="number" class="form-control form-control-lg" placeholder="Mobile Number" name="number" />
+    </div>
 
-  <div class="form-outline mb-3">
-    <input type="number" class="form-control form-control-lg" placeholder="Mobile Number"
-      name="number" />
-  </div>
+    <div class="form-outline mb-3">
+      <input type="text" class="form-control form-control-lg" placeholder="City" name="city" />
+    </div>
 
-  <div class="form-outline mb-3">
-    <input type="text" class="form-control form-control-lg" placeholder="City"
-      name="city" />
-  </div>
+    <div class="form-outline mb-3">
+      <input type="text" class="form-control form-control-lg" placeholder="State" name="state" />
+    </div>
 
-  <div class="form-outline mb-3">
-    <input type="text" class="form-control form-control-lg" placeholder="State"
-      name="state" />
-  </div>
+    <div class="form-outline mb-3">
+      <input type="text" class="form-control form-control-lg" placeholder="Locality" name="locality" />
+    </div>
 
-  <div class="form-outline mb-3">
-    <input type="text" class="form-control form-control-lg" placeholder="Locality"
-      name="locality" />
-  </div>
+    <div class="form-outline mb-3">
+      <input type="text" class="form-control form-control-lg" placeholder="Street" name="street" />
+    </div>
 
-  <div class="form-outline mb-3">
-    <input type="text" class="form-control form-control-lg" placeholder="Street"
-      name="street" />
-  </div>
+    <div class="form-outline mb-3">
+      <input type="text" class="form-control form-control-lg" placeholder="PIN" name="pin" />
+    </div>
 
-  <div class="form-outline mb-3">
-    <input type="text" class="form-control form-control-lg" placeholder="PIN"
-      name="pin" />
-  </div>
-
-  <div class="text-center text-lg-start mt-4 pt-2">
-    <button type="submit" class="btn btn-primary btn-lg"
-      style="padding-left: 2.5rem; padding-right: 2.5rem;">Register</button>
-    <p class="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a href="./" class="link-danger">Sign In</a></p>
-  </div>
-</form>
+    <div class="text-center text-lg-start mt-4 pt-2">
+      <button type="submit" class="btn btn-primary btn-lg"
+        style="padding-left: 2.5rem; padding-right: 2.5rem;">Register</button>
+      <p class="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a href="./" class="link-danger">Sign In</a></p>
+    </div>
+  </form>
 </div>
 {% endblock form %}

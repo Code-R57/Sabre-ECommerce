@@ -1,5 +1,5 @@
 {%extends 'base.html' %}
-
+{% load static %}
 {% block head_title %}Home{% endblock head_title %}
 {% block uid %}{{ uid }}{% endblock uid %}
 {% block body %}
@@ -11,20 +11,22 @@
         <div class="row no-gutters align-items-center pt-60px">
           <div class="col-5 d-none d-sm-block">
             <div class="hero-banner__img">
-              <img class="img-fluid" src="static/img/home/hero-banner.png" alt="">
+              {% comment %} <img class="img-fluid" src="data:image/png;base64,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"> {% endcomment %}
             </div>
           </div>
           <div class="col-sm-7 col-lg-6 offset-lg-1 pl-4 pl-md-5 pl-lg-0">
             <div class="hero-banner__content">
-              <h4>Shop is fun</h4>
-              <h1>Browse Our Premium Product</h1>
-              <p>Us which over of signs divide dominion deep fill bring they're meat beho upon own earth without morning over third. Their male dry. They are great appear whose land fly grass.</p>
-              <a class="button button-hero" href="#">Browse Now</a>
+              <h4>Shop with Sabre!</h4>
+              <h1>Browse Our Premium Products</h1>
+              <p>We at Sabre aim to provide a user-friendly experience to our customers with an effort to deliver the best service at the cheapest prices.</p>
+              <a class="button button-hero" href="/search">Browse Now</a>
             </div>
           </div>
         </div>
       </div>
     </section>
+
+   
     <!--================ Hero banner start =================-->
 
     <!--================ Hero Carousel start =================-->
@@ -59,21 +61,23 @@
     <section class="section-margin calc-60px">
       <div class="container">
         <div class="section-intro pb-60px">
-          <p>Popular Item in the market</p>
+          <p style="font-size:24px;margin-bottom:12px">Popular Item in the market</p>
           <h2>Trending <span class="section-intro__style">Product</span></h2>
         </div>
         <div class="row">
           {% for product in products %}
           <div class="col-md-6 col-lg-4 col-xl-3">
             <div class="card text-center card-product">
+              <div class="pandey">
               <div class="card-product__img">
-                <img class="card-img" src="static/img/product/product1.png" alt="">
+                <img class="card-img" src="https://www.aaronfaber.com/wp-content/uploads/2017/03/product-placeholder-wp.jpg" alt="" style="max-width: 100%; height: auto;">
               </div>
               <div class="card-body">
-                <p>{{ product.6 }}</p>
+                <p>{{ product.7 }}</p>
                 <h4 class="card-product__title"><a href="/productdescription/{{product.1}}">{{ product.2 }}</a></h4>
                 <p class="card-product__price">₹{{ product.5 }}</p>
               </div>
+            </div>
             </div>
           </div>
           {% endfor %}
@@ -86,28 +90,31 @@
     <section class="section-margin calc-60px">
       <div class="container">
         <div class="section-intro pb-60px">
-          <p>Popular Item in the market</p>
+          <p style="font-size:24px;margin-bottom:12px">Popular Item in the market</p>
           <h2>Best <span class="section-intro__style">Sellers</span></h2>
         </div>
         {% for category in categoryList %}
         <div class="section-intro pb-30px">
           <h4>{{ category.0 }}</h4>
+          <br><br>
         </div>
-        <div>
+        <div class="row">
           {% for product in category.1 %}
-          <div class="col-md-6 col-lg-4 col-xl-3">
+          <div class="col-md-4 col-lg-4 col-xl-4">
             <div class="card text-center card-product">
+              <div class="pandey">
               <div class="card-product__img">
-                <img class="card-img" src="img/product/product1.png" alt="">
+                <img class="card-img" src="https://www.aaronfaber.com/wp-content/uploads/2017/03/product-placeholder-wp.jpg" alt="" style="max-width: 100%; height: auto;">
               </div>
               <div class="card-body">
                 <h4 class="card-product__title"><a href="/productdescription/{{product.0}}">{{product.1}}</a></h4>
                 <p class="card-product__price">₹{{ product.4 }}</p>
               </div>
             </div>
+            </div>
           </div>
           {% endfor %}
-        <div>
+        </div>
         {% endfor %}
       </div>
     </section>

@@ -1,120 +1,126 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block head_title %}Search{% endblock head_title %}
 {% block uid %}{{ uid }}{% endblock uid %}
 {% block body %}
 <section class="section-margin--small mb-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-xl-3 col-lg-4 col-md-5">
-          <div class="sidebar-categories">
-            <div class="head">Browse Categories</div>
-            <ul class="main-categories">
-              <li class="common-filter">
-                <form action="#">
-                  <ul>
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="men" name="brand"><label
-                        for="men">Men<span> (3600)</span></label></li>
-                  </ul>
-                </form>
-              </li>
-            </ul>
-          </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12">
+        <!-- Start Filter Bar -->
+        <div class="row filter-bar d-flex flex-wrap align-items-center">
+          <table>
+            <form action="/search_result" method="POST">
+              {% csrf_token %}
+              <td>
+                <div class="input-group filter-bar-search">
+                  <input type="text" name="productName" placeholder="Search" style="width: 700px; margin-right: 30px;">
+                  <div class="input-group-append">
+                    <!-- <button type="button"><i class="ti-search"></i></button> -->
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="input-group filter-bar-search">
+                  <select name="criteria">
+                    <option value="Price">Price</option>
+                    <option value="Rating">Rating</option>
+                  </select>
+                </div>
+              </td>
+              <td>
+                <div class="input-group filter-bar-search">
+                  <div class="col-1">
+                    <button type="submit" class="button1"> Search </button>
+                  </div>
+                </div>
+              </td>
+            </form>
+          </table>
         </div>
-        <div class="col-xl-9 col-lg-8 col-md-7">
-          <!-- Start Filter Bar -->
-          <div class="filter-bar d-flex flex-wrap align-items-center">
-            <div>
-              <div class="input-group filter-bar-search">
-                <input type="text" placeholder="Search">
-                <div class="input-group-append">
-                  <button type="button"><i class="ti-search"></i></button>
+        <!-- End Filter Bar -->
+        <!-- Start Best Seller -->
+        <section class="lattest-product-area pb-40 category-list">
+          <div class="row">
+            {% for product in products %}
+            <div class="col-md-6 col-lg-4 col-xl-3">
+              <div class="card text-center card-product">
+                <div class="card-product__img">
+                  <img class="card-img" src="https://www.aaronfaber.com/wp-content/uploads/2017/03/product-placeholder-wp.jpg" alt="" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="card-body">
+                  <p>{{ product.6 }}</p>
+                  <h4 class="card-product__title"><a href="/productdescription/{{product.1}}">{{ product.2 }}</a></h4>
+                  <p class="card-product__price">₹{{ product.5 }}</p>
                 </div>
               </div>
             </div>
-          </div>
-          <!-- End Filter Bar -->
-          <!-- Start Best Seller -->
-          <section class="lattest-product-area pb-40 category-list">
-            <div class="row">
-              <div class="col-md-6 col-lg-4">
-                <div class="card text-center card-product">
-                  <div class="card-product__img">
-                    <img class="card-img" src="img/product/product1.png" alt="">
-                  </div>
-                  <div class="card-body">
-                    <p>Accessories</p>
-                    <h4 class="card-product__title"><a href="#">Quartz Belt Watch</a></h4>
-                    <p class="card-product__price">$150.00</p>
-                  </div>
+            {% endfor %}
+            <!-- <div class="col-md-6 col-lg-4">
+              <div class="card text-center card-product">
+                <div class="card-product__img">
+                  <img class="card-img" src="img/product/product2.png" alt="">
                 </div>
-              </div>
-              <div class="col-md-6 col-lg-4">
-                <div class="card text-center card-product">
-                  <div class="card-product__img">
-                    <img class="card-img" src="img/product/product2.png" alt="">
-                  </div>
-                  <div class="card-body">
-                    <p>Beauty</p>
-                    <h4 class="card-product__title"><a href="#">Women Freshwash</a></h4>
-                    <p class="card-product__price">$150.00</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4">
-                <div class="card text-center card-product">
-                  <div class="card-product__img">
-                    <img class="card-img" src="img/product/product3.png" alt="">
-                  </div>
-                  <div class="card-body">
-                    <p>Decor</p>
-                    <h4 class="card-product__title"><a href="#">Room Flash Light</a></h4>
-                    <p class="card-product__price">$150.00</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4">
-                <div class="card text-center card-product">
-                  <div class="card-product__img">
-                    <img class="card-img" src="img/product/product4.png" alt="">
-                  </div>
-                  <div class="card-body">
-                    <p>Decor</p>
-                    <h4 class="card-product__title"><a href="#">Room Flash Light</a></h4>
-                    <p class="card-product__price">$150.00</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4">
-                <div class="card text-center card-product">
-                  <div class="card-product__img">
-                    <img class="card-img" src="img/product/product5.png" alt="">
-                  </div>
-                  <div class="card-body">
-                    <p>Accessories</p>
-                    <h4 class="card-product__title"><a href="#">Man Office Bag</a></h4>
-                    <p class="card-product__price">$150.00</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4">
-                <div class="card text-center card-product">
-                  <div class="card-product__img">
-                    <img class="card-img" src="img/product/product6.png" alt="">
-                  </div>
-                  <div class="card-body">
-                    <p>Kids Toy</p>
-                    <h4 class="card-product__title"><a href="#">Charging Car</a></h4>
-                    <p class="card-product__price">$150.00</p>
-                  </div>
+                <div class="card-body">
+                  <p>Beauty</p>
+                  <h4 class="card-product__title"><a href="#">Women Freshwash</a></h4>
+                  <p class="card-product__price">$150.00</p>
                 </div>
               </div>
             </div>
-        </div>
-  </section>
-  <!-- End Best Seller -->
+            <div class="col-md-6 col-lg-4">
+              <div class="card text-center card-product">
+                <div class="card-product__img">
+                  <img class="card-img" src="img/product/product3.png" alt="">
+                </div>
+                <div class="card-body">
+                  <p>Decor</p>
+                  <h4 class="card-product__title"><a href="#">Room Flash Light</a></h4>
+                  <p class="card-product__price">$150.00</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card text-center card-product">
+                <div class="card-product__img">
+                  <img class="card-img" src="img/product/product4.png" alt="">
+                </div>
+                <div class="card-body">
+                  <p>Decor</p>
+                  <h4 class="card-product__title"><a href="#">Room Flash Light</a></h4>
+                  <p class="card-product__price">$150.00</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card text-center card-product">
+                <div class="card-product__img">
+                  <img class="card-img" src="img/product/product5.png" alt="">
+                </div>
+                <div class="card-body">
+                  <p>Accessories</p>
+                  <h4 class="card-product__title"><a href="#">Man Office Bag</a></h4>
+                  <p class="card-product__price">$150.00</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card text-center card-product">
+                <div class="card-product__img">
+                  <img class="card-img" src="img/product/product6.png" alt="">
+                </div>
+                <div class="card-body">
+                  <p>Kids Toy</p>
+                  <h4 class="card-product__title"><a href="#">Charging Car</a></h4>
+                  <p class="card-product__price">$150.00</p>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </section>
+      </div>
+    </div>
   </div>
-  </div>
-  </div>
-  </section>
-  <!-- ================ category section end ================= -->
+</section>
+<!-- End Best Seller -->
 {% endblock body %}
