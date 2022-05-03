@@ -108,7 +108,7 @@ def addToCart(request, pid):
             if key=="sellers":
                 sid = value
 
-    query_check = "SELECT * FROM CART WHERE ProductID = '{}' AND SellerID = '{}'".format(pid, sid)
+    query_check = "SELECT * FROM CART WHERE ProductID = '{}' AND SellerID = '{}' AND UserID = '{}'".format(pid, sid, username)
     cursor.execute(query_check)
     check = tuple(cursor.fetchall())
 
